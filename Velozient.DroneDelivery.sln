@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Velozient.DroneDelivery.Console", "Velozient.DroneDelivery.Console\Velozient.DroneDelivery.Console.csproj", "{8ADDB2CD-C02A-4B06-8B58-B181F2A8E397}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Velozient.DroneDelivery.Tests", "Velozient.DroneScheduler.Tests\Velozient.DroneDelivery.Tests.csproj", "{CEEED046-876B-4CA2-8DCF-A9F00B92A409}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Velozient.DroneDelivery.Tests", "Velozient.DroneDelivery.Tests\Velozient.DroneDelivery.Tests.csproj", "{CEEED046-876B-4CA2-8DCF-A9F00B92A409}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
