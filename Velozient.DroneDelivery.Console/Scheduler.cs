@@ -22,7 +22,7 @@ namespace Velozient.DroneDelivery.Console
                 result = drones.Select(drone =>
                 {
                     var tripsForDrone = GetScheduledTripsForDrone(drone, result);
-                    var locationsPicked = PickLocationsForCapacity(drone.MaxWeight, locationsLeft);
+                    var locationsPicked = GetLocationsForCapacity(drone.MaxWeight, locationsLeft);
                     if (locationsPicked.Count > 0)
                     {
                         locationsLeft = locationsLeft.Where(location => locationsPicked.All(x => x.Name != location.Name)).ToList();
@@ -40,7 +40,7 @@ namespace Velozient.DroneDelivery.Console
             return schedule.Aggregate(new List<Trip>(), (List<Trip> trips, DroneSchedule droneSchedule) => droneSchedule.Drone.Name == drone.Name ? droneSchedule.Trips : trips);
         }
 
-        private List<Location> PickLocationsForCapacity(double capacity, List<Location> locationsLeft)
+        private List<Location> GetLocationsForCapacity(double capacity, List<Location> locationsLeft)
         {
             var locationsPicked = new List<Location>();
             int index = 0;
@@ -50,7 +50,7 @@ namespace Velozient.DroneDelivery.Console
                 var remainingCapacity = capacity - currentLoad;
                 if (currentLocation.Weight < remainingCapacity && locationsLeft.Count > 1)
                 {
-                    var found = PickLocationsForCapacity(remainingCapacity - currentLocation.Weight, locationsLeft.Skip(index + 1).ToList());
+                    var found = GetLocationsForCapacity(remainingCapacity - currentLocation.Weight, locationsLeft.Skip(index + 1).ToList());
                     if (found.Count > 0)
                     {
                         locationsPicked.Add(currentLocation);
