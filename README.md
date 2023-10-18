@@ -17,7 +17,7 @@ squad is 100, and there is no maximum number of deliveries which are required.
 
 ## Proposed solution
 
-The solution/algorithm provided consiste on recursiverly iterate over locations for each drone accumulating
+The solution/algorithm provided consists on recursiverly iterate over locations for each drone by accumulating
 values based on remaining capacity in every interation, this operation should take O(LogN) in the best case.
 
 Unit tests were also added to the solution
