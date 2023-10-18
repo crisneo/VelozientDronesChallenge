@@ -37,17 +37,41 @@ namespace Velozient.DroneDelivery.Tests
         }
 
         [Test]
+        public void TestEmptyDrones()
+        {
+            var schedule = _scheduler.GenerateSchedule(new List<Drone>(), _locations);
+            Assert.IsEmpty(schedule);
+        }
+
+        [Test]
+        public void TestEmptyLocations()
+        {
+            var schedule = _scheduler.GenerateSchedule(_drones, new List<Location>());
+            Assert.IsEmpty(schedule);
+        }
+
+        [Test]
+        public void ExceededDronesTest()
+        {
+            var tDrones = new List<Drone>();
+            for (int i = 0; i < 1500; i++)
+            {
+                tDrones.Add(new Drone());
+            }
+            Assert.Throws<ArgumentException>(() => _scheduler.GenerateSchedule(tDrones, new List<Location>()));
+        }
+
+        [Test]
         public void TestScheduling()
         {
             var schedule = _scheduler.GenerateSchedule(_drones, _locations);
             var totalNumberOfTrips = CalculateTotalTrips(schedule);
             Assert.AreEqual(3, totalNumberOfTrips);
 
+            // schedule for Smart25 drone
             var smart25 = schedule[0];
             Assert.AreEqual(1, smart25.Trips.Count);
 
-
-            // schedule for Smart25 drone
             var expectedRoute = new List<Location>() { _locations[0], _locations[1], _locations[2], _locations[7] };
             var smart25Locations = new List<Location>();
             smart25.Trips.ForEach(trip =>
@@ -75,31 +99,6 @@ namespace Velozient.DroneDelivery.Tests
             });
             Assert.IsTrue(theBossLocations.All(x => ContainsLocation(expectedRouteForBossDrone, x)));
 
-        }
-
-        [Test]
-        public void TestEmptyDrones()
-        {
-            var schedule = _scheduler.GenerateSchedule(new List<Drone>(), _locations);
-            Assert.IsEmpty(schedule);
-        }
-
-        [Test]
-        public void TestEmptyLocations()
-        {
-            var schedule = _scheduler.GenerateSchedule(_drones, new List<Location>());
-            Assert.IsEmpty(schedule);
-        }
-
-        [Test]
-        public void ExceededDronesTest()
-        {
-            var tDrones = new List<Drone>();
-            for (int i = 0; i < 1500; i++)
-            {
-                tDrones.Add(new Drone());
-            }
-            Assert.Throws<ArgumentException>(() => _scheduler.GenerateSchedule(tDrones, new List<Location>()));
         }
 
         private double CalculateTotalTrips(List<DroneSchedule> schedule)

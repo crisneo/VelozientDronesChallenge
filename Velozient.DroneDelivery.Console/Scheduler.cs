@@ -14,9 +14,7 @@ namespace Velozient.DroneDelivery.Console
     {
         public List<DroneSchedule> GenerateSchedule(List<Drone> drones, List<Location> locations)
         {
-
             if (drones.Count > 100) throw new ArgumentException("Max number of 100 drones exceeded");
-
             var result = new List<DroneSchedule>();
             var locationsLeft = locations.ToList();
             while (drones.Count > 0 && locationsLeft.Count > 0)
@@ -55,7 +53,6 @@ namespace Velozient.DroneDelivery.Console
                     var found = PickLocationsForCapacity(remainingCapacity - currentLocation.Weight, locationsLeft.Skip(index + 1).ToList());
                     if (found.Count > 0)
                     {
-
                         locationsPicked.Add(currentLocation);
                         locationsPicked.AddRange(found);
                         index++;
@@ -64,7 +61,6 @@ namespace Velozient.DroneDelivery.Console
                 }
                 else if (currentLocation.Weight <= remainingCapacity)
                 {
-
                     locationsPicked.Add(currentLocation);
                     index++;
                     return locationsPicked;

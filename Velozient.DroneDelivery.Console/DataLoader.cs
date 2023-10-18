@@ -10,7 +10,7 @@ namespace Velozient.DroneDelivery.Console
 {
     public class DataLoader
     {
-        private string _csvFileName = "";
+        private string _csvFileName = string.Empty;
         public DataLoader(string csvFileName)
         {
             _csvFileName = csvFileName;
@@ -31,7 +31,6 @@ namespace Velozient.DroneDelivery.Console
         public List<Drone> LoadDrones()
         {
             var drones = new List<Drone>();
-            //var lines = File.ReadLines(_csvFileName).Select(x => x.Trim()).ToList();
             var lines = ReadFileLines(_csvFileName);
             if (lines.Count > 0)
             {
@@ -43,13 +42,11 @@ namespace Velozient.DroneDelivery.Console
                 }
             }
             return drones;
-
         }
 
         public List<Location> LoadLocations()
         {
             var locations = new List<Location>();
-            //var lines = File.ReadLines(_csvFileName).Select(x => x.Trim()).ToList();
             var lines = ReadFileLines(_csvFileName);
             if (lines.Count > 1)
             {
