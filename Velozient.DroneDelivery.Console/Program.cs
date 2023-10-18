@@ -3,13 +3,13 @@ using System.Reflection;
 using Velozient.DroneDelivery.Console;
 using Velozient.DroneDelivery.Console.Utils;
 
-string dir = PathUtils.GetExecutingAssemblyFolder();
+var dir = PathUtils.GetExecutingAssemblyFolder();
 var dataLoader = new DataLoader(dir + "\\Data\\data.csv");
 var drones = dataLoader.LoadDrones();
 var locations = dataLoader.LoadLocations();
 var scheduler = new Scheduler();
 var res = scheduler.GenerateSchedule(drones, locations);
-int droneIndex = 0;
+var droneIndex = 0;
 res.ForEach(schedule =>
 {
     Console.WriteLine($"[Dron: {schedule.Drone.Name}]");
