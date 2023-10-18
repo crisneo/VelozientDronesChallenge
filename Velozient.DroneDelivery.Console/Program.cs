@@ -8,9 +8,9 @@ var dataLoader = new DataLoader(dir + "\\Data\\data.csv");
 var drones = dataLoader.LoadDrones();
 var locations = dataLoader.LoadLocations();
 var scheduler = new Scheduler();
-var res = scheduler.GenerateSchedule(drones, locations);
+var scheduling = scheduler.GenerateSchedule(drones, locations);
 var droneIndex = 0;
-res.ForEach(schedule =>
+scheduling.ForEach(schedule =>
 {
     Console.WriteLine($"[Dron: {schedule.Drone.Name}]");
     var tripIndex = 0;
